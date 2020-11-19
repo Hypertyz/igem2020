@@ -69,7 +69,7 @@ mod_gseDO_server <- function(input, output, session, con, Description1_ui_1, mod
     )
   })  
   
-  observeEvent(c(Description1_ui_1$module_name, module_overview_ui_1$value$delete, module_overview_ui_1$value$upload), {
+  observeEvent(c(Description1_ui_1$infer, module_overview_ui_1$value$delete, module_overview_ui_1$value$upload), {
     module_objects <- unlist(MODifieRDB::get_available_module_objects(con)$module_name)
     updateSelectInput(session, "module_object", choices = module_objects)
   })

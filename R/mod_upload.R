@@ -48,9 +48,10 @@ mod_upload_server <- function(input, output, session, con){
       return(NULL)
     }
     if(input$expression_matrix$type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
-      f <- as.matrix(readxl::read_excel(infile))
-      rownames(f) <- f[,1]
-      f <- f[,-1]
+      fi <- readxl::read_excel(infile)
+      f <- as.matrix(fi[,-1])
+      fi <- as.matrix(fi)
+      rownames(f) <- fi[,1]
       return(f)
     }
     else {

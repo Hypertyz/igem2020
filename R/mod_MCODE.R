@@ -91,7 +91,7 @@ mod_MCODE_ui <- function(id){
     prettySwitch(
       ns("loops"),
       label = "Loops",
-      value = FALSE,
+      value = TRUE,
       status = "warning",
       popup = "Include self-loops."
     ),
