@@ -1086,6 +1086,7 @@ body {
   line-height: 1.42857143;
   color: #ffbd40;
   background-color: #fff9f9;
+  overflow:hidden;
 }
 input,
 button,
@@ -7343,6 +7344,7 @@ a[type="heading"]:hover, a[type="heading"]:focus{
 .container-fluid{
   padding-left: 0;
   padding-right: 0;
+  overflow: hidden;
 }
 
 

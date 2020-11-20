@@ -139,7 +139,8 @@ mod_main_page_v2_server <- function(input, output, session, con, app_servr){
   
   observeEvent(app_servr$loaded, {
     output$loaded <- renderUI({
-      tags$script("$('body').toggleClass('loaded');")
+      tags$script("$('body').toggleClass('loaded');
+                  $('body').css('overflow', 'auto');")
     })
   })
   
