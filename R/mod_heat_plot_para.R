@@ -52,7 +52,8 @@ mod_heat_plot_para_server <- function(input, output, session, selected, con){
       paste0("heat_plot.pdf", sep="")
     },
     content = function(file) {
-      enrichment_object <- MODifieRDB::enrichment_object_from_db(selected$selected_object, con)
+      enrichment_objects <- MODifieRDB::get_available_enrichment_objects(con)
+      enrichment_object <- MODifieRDB::enrichment_object_from_db(enrichment_objects$enrichment_name[selected$selected_object], con)
       p <- gene_heatmap(CPobj = enrichment_object,
                    NP = heat_plot_para_module$pathways_displayed,
                    NG = heat_plot_para_module$genes_displayed,

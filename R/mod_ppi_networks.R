@@ -116,7 +116,7 @@ mod_ppi_networks_server <- function(input, output, session, con){
   sqlite_db <- system.file("database", "igem.sqlite", package = "ClusteRsy")
   sqlite_con <- MODifieRDB::connect_to_db(sqlite_db) #Could perhaps be moved to run_app
   if (nrow(RSQLite::dbListObjects(sqlite_con)) == 0) {
-    
+    print("Creating Clique SQLite")
     try(MODifieRDB::build_clique_db_db(ppi_name = "Default_string_700",
                                        db_folder =  sub(pattern = 'igem.sqlite', replacement = "", sqlite_db),
                                        db_name = "igem",

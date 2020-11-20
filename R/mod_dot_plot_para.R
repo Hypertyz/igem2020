@@ -51,7 +51,8 @@ mod_dot_plot_para_server <- function(input, output, session, selected, con){
       paste0("dot_plot.pdf")
     },
     content = function(file) {
-      erichment_object <- MODifieRDB::enrichment_object_from_db(selected$selected_object, con)
+      enrichment_objects <- MODifieRDB::get_available_enrichment_objects(con)
+      enrichment_object <- MODifieRDB::enrichment_object_from_db(enrichment_objects$enrichment_name[selected$selected_object], con)
       p <- clusterProfiler::dotplot(enrichment_object,
                                x=dot_plot_para_module$xaxis,
                                showCategory = dot_plot_para_module$showcategory,

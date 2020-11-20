@@ -54,7 +54,8 @@ mod_enrichment_map_para_server <- function(input, output, session, selected, con
       paste0("enrichment_map_plot.pdf")
     },
     content = function(file) {
-      erichment_object <- MODifieRDB::enrichment_object_from_db(selected$selected_object, con)
+      enrichment_objects <- MODifieRDB::get_available_enrichment_objects(con)
+      enrichment_object <- MODifieRDB::enrichment_object_from_db(enrichment_objects$enrichment_name[selected$selected_object], con)
       p <-enrichplot::emapplot(x = enrichment_object,
                           showCategory = enrichment_map_para_module$showcategory,
                           color = enrichment_map_para_module$color,

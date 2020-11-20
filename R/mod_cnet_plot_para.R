@@ -62,8 +62,13 @@ mod_cnet_plot_para_server <- function(input, output, session, selected, con){
       paste0("cnet_plot.pdf", sep="")
     },
     content = function(file) {
-      enrichment_object <<- MODifieRDB::enrichment_object_from_db(selected$selected_object, con)
+      enrichment_objects <- MODifieRDB::get_available_enrichment_objects(con)
+      enrichment_object <- MODifieRDB::enrichment_object_from_db(enrichment_objects$enrichment_name[selected$selected_object], con)
       enrichment_object_readable <- DOSE::setReadable(enrichment_object, OrgDb = 'org.Hs.eg.db', keyType = "ENTREZID")
+      
+      input_name <- MODifieRDB::get_input_name_by_enrichment_row(enrichment_objects$enrichment_name[selected$selected_object], con)
+      edgeR_deg_table <- MODifieRDB::MODifieR_input_from_db(input_name, con)$edgeR_deg_table
+      logFC <- edgeR_deg_table$logFC %>% set_names(. , rownames(edgeR_deg_table))
       p <- enrichplot::cnetplot(x = enrichment_object_readable,
                            showCategory = cnet_plot_para_module$showcategory,
                            foldChange = enrichment_object,
