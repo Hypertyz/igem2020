@@ -55,7 +55,7 @@ mod_upload_server <- function(input, output, session, con){
       return(f)
     }
     if(input$expression_matrix$type == "text/csv" | input$expression_matrix$type == "application/vnd.ms-excel"){
-      read.csv(file = infile, header = T, row.names = 1)
+      read.csv(file = infile, header = T, row.names = 1, sep = "")
     }
     else {
       read.table(file = infile, header = T, row.names = 1) 

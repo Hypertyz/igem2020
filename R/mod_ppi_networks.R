@@ -86,7 +86,7 @@ mod_ppi_networks_server <- function(input, output, session, con){
   if (nrow(ppi_networks) == 0) {
     PPI_network <- read.delim(system.file("ppi_networks", "PPI_network.txt",package = "ClusteRsy"))
     MODifieRDB::ppi_network_to_db(PPI_network,
-                                  ppi_name = "Default_string_700",
+                                  ppi_name = "homo_sapien",
                                   con = con)
     ppi_networks <- as.data.frame(MODifieRDB::get_available_networks(con))
     colnames(ppi_networks) <- "PPI networks"
@@ -94,7 +94,7 @@ mod_ppi_networks_server <- function(input, output, session, con){
                                                rownames = FALSE,
                                                selection = list(selected = c(1)))
     
-  } else if (any(ppi_networks == "Default_string_700")) {
+  } else if (any(ppi_networks == "homo_sapien")) {
     ppi_networks <- as.data.frame(MODifieRDB::get_available_networks(con))
     colnames(ppi_networks) <- "PPI networks"
     output$ppi_overview <- DT::renderDataTable(ppi_networks,
@@ -103,7 +103,7 @@ mod_ppi_networks_server <- function(input, output, session, con){
   } else {
     PPI_network <- read.delim(system.file("ppi_networks","PPI_network.txt", package = "ClusteRsy"))
     MODifieRDB::ppi_network_to_db(PPI_network,
-                                  ppi_name = "Default_string_700",
+                                  ppi_name = "homo_sapien",
                                   con = con)
     ppi_networks <- as.data.frame(MODifieRDB::get_available_networks(con))
     colnames(ppi_networks) <- "PPI networks"
@@ -117,7 +117,7 @@ mod_ppi_networks_server <- function(input, output, session, con){
   sqlite_con <- MODifieRDB::connect_to_db(sqlite_db) #Could perhaps be moved to run_app
   if (nrow(RSQLite::dbListObjects(sqlite_con)) == 0) {
     print("Creating Clique SQLite")
-    try(MODifieRDB::build_clique_db_db(ppi_name = "Default_string_700",
+    try(MODifieRDB::build_clique_db_db(ppi_name = "homo_sapien",
                                        db_folder =  sub(pattern = 'igem.sqlite', replacement = "", sqlite_db),
                                        db_name = "igem",
                                        con = con))
