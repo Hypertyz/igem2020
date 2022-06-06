@@ -15,12 +15,12 @@ run_app <- function(db = NULL,...){
     app = shinyApp(
       ui = app_ui, 
       server = app_server,
-#      options = (list(
-#        host = "192.168.50.55",
-#        port = 80,
-#        launch.browser  = F
-#      )
-#      )
+      options = (list(
+        host = "192.168.50.55",
+        port = 80,
+        launch.browser  = F
+      )
+      )
     ), 
     golem_opts = list(...)
   )
